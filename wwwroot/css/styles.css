@@ -1,0 +1,33 @@
+﻿body {
+    background: linear-gradient(135deg, #3795BD, #4ADCF7);
+    font-family: 'Arial', sans-serif;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    background: #fff;
+}
+
+    .form-card h2 {
+        font-weight: bold;
+    }
+
+input:focus {
+    border-color: #3795BD !important;
+    box-shadow: 0 0 5px rgba(55, 149, 189, 0.5) !important;
+}
+
+button {
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
