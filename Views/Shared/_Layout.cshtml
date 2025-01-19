@@ -29,7 +29,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Feedback">Feedback</a>
                         </li>
                     </ul>
-                    <p class="nav navbar-text">Hello, @User.Identity?.Name!</p>
+                    @* <p class="nav navbar-text">Hello, @User.Identity?.Name!</p> *@
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Login">Login</a>
                 </div>
             </div>
         </nav>
