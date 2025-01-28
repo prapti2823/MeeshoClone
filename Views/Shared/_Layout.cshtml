@@ -98,7 +98,7 @@
             </div>
 
             <div class="headerRight">
-                <div class="downloadContainer">
+                @* <div class="downloadContainer">
                     <div class="mobileIcon">
                         <img src="~/user/images/HomePage/NavBar/mobile.png" />
                     </div>
@@ -114,7 +114,7 @@
                             <img src="https://images.meesho.com/images/pow/appstore-icon-big.webp" />
                         </a>
                     </div>
-                </div>
+                </div> *@
 
                 <div class="becomeSupplierContainer">
                     <p>Become a Supplier</p>
@@ -140,7 +140,7 @@
                                 <!-- <a href="/signup.html"><button class="sign-up">admin</button></a> -->
                                 <div class="orderIcon">
                                     <!-- <img src="~/user/images/HomePage/NavBar/orders.png"> -->
-                                    <a href="/admin/admin.html"><button class="sign-up">admin</button></a>
+                                    <a asp-controller="Admin" asp-action="Index"><button class="sign-up">admin</button></a>
                                 </div>
                             </div>
                         </div>
