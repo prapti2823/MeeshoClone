@@ -1,5 +1,4 @@
 ﻿using MeeshoClone.Data;
-using MeeshoClone.Migrations;
 using MeeshoClone.Models.User;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,10 +18,11 @@ namespace MeeshoClone.Controllers
         //    return View();
         //}
 
+        [HttpGet]
         public IActionResult Read()
         {
-            var user = _db.User.ToList();
-            return View("~/Views/Admin/User Management/Read.cshtml", user);
+            List<User> users = _db.User.ToList();
+            return View("~/Views/Admin/User Management/Read.cshtml", users);
         }
 
         public IActionResult Edit(long? Id)
@@ -36,12 +36,24 @@ namespace MeeshoClone.Controllers
             {
                 return NotFound();
             }
-            return View("~/Views/Admin/User Management/Read.cshtml", user);
+            return View("~/Views/Admin/User Management/Edit.cshtml", user);
         }
 
         [HttpPost]
         public IActionResult Edit(User obj)
         {
+            var existingUser = _db.User.Find(obj.Id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            // 🔹 Keep the existing password
+            obj.Password = existingUser.Password;
+            obj.CreatedDate = existingUser.CreatedDate;
+
+            ModelState.Remove("Password");
+
             if (ModelState.IsValid)
             {
                 _db.User.Update(obj);
@@ -50,7 +62,7 @@ namespace MeeshoClone.Controllers
                 TempData["Type"] = "Success";
                 return RedirectToAction("Read", "User");
             }
-            return View("~/Views/Admin/User Management/Read.cshtml");
+            return View("~/Views/Admin/User Management/Edit.cshtml",obj);
         }
 
         public IActionResult Delete(long? Id)
@@ -64,7 +76,7 @@ namespace MeeshoClone.Controllers
             {
                 return NotFound();
             }
-            return View("~/Views/Admin/User Management/Read.cshtml", user);
+            return View("~/Views/Admin/User Management/Delete.cshtml", user);
         }
 
         [HttpPost, ActionName("Delete")]

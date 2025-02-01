@@ -9,7 +9,7 @@ namespace MeeshoClone.Data
         {
 
         }
-
         public DbSet<User> User { get; set; }
+
     }
 }
