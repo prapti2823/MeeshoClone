@@ -12,10 +12,9 @@ namespace MeeshoClone.Models.User
         public string Username { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
         public string Password { get; set; }
         //[Required]
-        //public string ConfirmPassword { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
     }
 }
