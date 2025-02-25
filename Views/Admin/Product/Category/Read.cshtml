@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var c = 0;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Category Data</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Super Category</th>
+                        <th>Created Date</th>
+                        @* <th>Status</th> *@
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @* @foreach (var categorydata in Model)
+                    {
+                        c = c + 1;
+                        <tr>
+                            <td>@c</td>
+                            <td>@categorydata.Name</td>
+                            <td>@categorydata.parent_category_id</td>
+                            <td>@categorydata.CreatedDate</td>
+                            @* <td>@userdata.IsActive</td> 
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="ri-more-2-line"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-controller="Category" asp-action="Edit" asp-route-Id="@categorydata.Id"><i class="ri-pencil-line me-1"></i> Edit</a>
+                                        <a class="dropdown-item" asp-controller="Category" asp-action="Delete" asp-route-Id="@categorydata.Id"><i class="ri-delete-bin-6-line me-1"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    } *@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,9 @@
 @model MeeshoClone.Views.Authentication.LoginModel
 @{
     Layout = "";
+    var msg = TempData["Message"];
+    var type = TempData["Type"];
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -12,28 +15,122 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
           rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/admin/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/admin/assets/vendor/fonts/remixicon/remixicon.css" />
+
+    <!-- Menu waves for no-customizer fix -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/node-waves/node-waves.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/admin/assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script src="~/admin/assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/admin/assets/js/config.js"></script>
+
 </head>
 <body>
-    <div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="card shadow-lg p-4 rounded form-card">
-            <h2 class="text-center text-primary mb-4">Login</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="login-email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+   <div>
+       @*  @if (msg != null)
+        {
+            <div class="toast-container position-relative">
+                <div class="bs-toast toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="ri-checkbox-circle-fill text-success me-2"></i>
+                        <div class="me-auto fw-medium">@type</div>
+                        <small class="text-muted">11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">@msg</div>
                 </div>
-                <div class="mb-3">
-                    <label for="login-password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Enter your password">
+            </div>
+        } *@
+
+        @if (msg != null)
+        {
+            <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+                <div class="toast show align-items-center text-black border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        @if (type == "Success")
+                        {
+                            <i class="ri-checkbox-circle-fill text-success me-2"></i>
+                        }
+                        else
+                        {
+                            <i class="ri-error-warning-fill text-danger me-2"></i>
+                        }
+                        <div class="me-auto fw-medium">@type</div>
+                    <small class="text-muted">11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                <div class="toast-body">@msg</div>
                 </div>
-                <p class="text-center mt-3">
-                    Don't have an account? <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="SignUp">SignUp</a>
-                </p>
-            </form>
+            </div>
+        }
+
+
+        <div class="container d-flex align-items-center justify-content-center vh-100">
+            <div class="card shadow-lg p-4 rounded form-card">
+                <h2 class="text-center text-primary mb-4">Login</h2>
+                <form method="post" asp-action="Login" asp-controller="Authentication">
+                    <div class="mb-3">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="Email" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="Password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                    <p class="text-center mt-3">
+                        Don't have an account? <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="SignUp">SignUp</a>
+                    </p>
+                </form>
+            </div>
         </div>
-    </div>
+   </div>
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/admin/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="~/admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="~/admin/assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="~/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/admin/assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="~/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/admin/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="~/admin/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 </html>

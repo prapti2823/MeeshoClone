@@ -1,0 +1,58 @@
+﻿@model MeeshoClone.Models.Supplier.Supplier
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Edit Supplier</h5>
+        <div class="card-body">
+            <form asp-controller="Supplier" asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label class="form-label">Business Name</label>
+                    <input type="text" class="form-control" asp-for="BusinessName" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Store Name</label>
+                    <input type="text" class="form-control" asp-for="StoreName" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">GSTIN</label>
+                    <input type="text" class="form-control" asp-for="GSTIN" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" asp-for="Email" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" asp-for="PhoneNumber" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">State</label>
+                    <input type="text" class="form-control" asp-for="State" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Country</label>
+                    <input type="text" class="form-control" asp-for="Country" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Is Active</label>
+                    <input type="checkbox" asp-for="IsActive" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -13,8 +13,11 @@ namespace MeeshoClone.Models.User
         [Required]
         public string Email { get; set; }
         public string Password { get; set; }
+        public string? Role { get; set; }
+        public string MobileNumber { get; set; }
         //[Required]
-        public System.DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
         public bool IsActive { get; set; }
     }
 }
