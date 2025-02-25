@@ -42,17 +42,15 @@ namespace MeeshoClone.Controllers
         [HttpPost]
         public IActionResult Edit(User obj)
         {
-            var existingUser = _db.User.Find(obj.Id);
-            if (existingUser == null)
-            {
-                return NotFound();
-            }
+            //var existingUser = _db.User.Find(obj.Id);
+            //if (existingUser == null)
+            //{
+            //    return NotFound();
+            //}
 
             // 🔹 Keep the existing password
-            obj.Password = existingUser.Password;
-            obj.CreatedDate = existingUser.CreatedDate;
-
-            ModelState.Remove("Password");
+            //obj.Password = existingUser.Password;
+            obj.UpdatedDate = DateTime.Now;
 
             if (ModelState.IsValid)
             {
@@ -62,7 +60,7 @@ namespace MeeshoClone.Controllers
                 TempData["Type"] = "Success";
                 return RedirectToAction("Read", "User");
             }
-            return View("~/Views/Admin/User Management/Edit.cshtml",obj);
+            return View("~/Views/Admin/User Management/Edit.cshtml");
         }
 
         public IActionResult Delete(long? Id)
@@ -80,7 +78,7 @@ namespace MeeshoClone.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteUser(int? Id)
+        public IActionResult DeleteUser(long? Id)
         {
             if (Id == null)
             {

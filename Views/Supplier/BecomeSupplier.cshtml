@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Become Supplier";
+}
+
+<div style="padding-top:30px">
+    <div>
+        <div class="p-5">
+            <div style="margin-top: 80px;">
+                <div class="container" style="background-color:white;">
+                    <div class="row">
+
+                        <div class="checkout_details_area mt-50 clearfix">
+                            <div class="cart-page-heading mb-30">
+                                <h5>Become a Supplier</h5>
+                            </div>
+
+                            <form asp-controller="Supplier" asp-action="BecomeSupplier" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="GSTIN">GSTIN <span>*</span></label>
+                                        <input type="text" class="form-control" id="GSTIN" name="GSTIN" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="BusinessName">Business Name</label>
+                                        <input type="text" class="form-control" id="BusinessName" name="BusinessName">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="StoreName">Store Name</label>
+                                        <input type="text" class="form-control" id="StoreName" name="StoreName">
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label for="BusinessAddress">Business Address</label>
+                                        <input type="text" class="form-control" id="BusinessAddress" name="BusinessAddress">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="State">State <span>*</span></label>
+                                        <input type="text" class="form-control" id="State" name="State" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="Postcode">Postcode</label>
+                                        <input type="text" class="form-control" id="Postcode" name="Postcode">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="Country">Country <span>*</span></label>
+                                        <select class="form-control" id="Country" name="Country" required>
+                                            <option value="India">India</option>
+                                            <option value="USA">USA</option>
+                                            <option value="UK">UK</option>
+                                            <!-- Add other countries here -->
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="PhoneNumber">Phone Number <span>*</span></label>
+                                        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="Email">Business Email <span>*</span></label>
+                                        <input type="email" class="form-control" id="Email" name="Email" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="BankAccountNumber">Bank Account Number</label>
+                                        <input type="text" class="form-control" id="BankAccountNumber" name="BankAccountNumber">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="BankName">Bank Name</label>
+                                        <input type="text" class="form-control" id="BankName" name="BankName">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="IFSCCode">IFSC Code</label>
+                                        <input type="text" class="form-control" id="IFSCCode" name="IFSCCode">
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <div class="custom-control custom-checkbox d-block mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="termsCheck" required>
+                                            <label class="custom-control-label" for="termsCheck">I agree to the <a href="#">terms and conditions</a></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">Become Supplier</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

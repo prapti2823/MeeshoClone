@@ -1,7 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+
 @{
+    var msg = TempData["Message"];
+    var type = TempData["Type"];
 }
 <!doctype html>
 
@@ -53,6 +58,26 @@
 </head>
 
 <body>
+    @if (msg != null)
+    {
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+            <div class="toast show align-items-center text-black border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    @if (@type == "Success")
+                    {
+                        <i class="ri-checkbox-circle-fill text-success me-2"></i>
+                    }
+                    else
+                    {
+                        <i class="ri-error-warning-fill text-danger me-2"></i>
+                    }
+                    <div class="me-auto fw-medium">@type</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">@msg</div>
+            </div>
+        </div>
+    }
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -61,7 +86,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-logo demo me-1">
+                        @* <span class="app-brand-logo demo me-1">
                             <span style="color: var(--bs-primary)">
                                 <svg width="30" height="24" viewBox="0 0 250 196" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -111,9 +136,9 @@
                                           fill="white"
                                           fill-opacity="0.3" />
                                 </svg>
-                            </span>
+                            </span> *@
                         </span>
-                        <span class="app-brand-text demo menu-text fw-semibold ms-2">Meesho</span>
+                        <span class="app-brand-text demo menu-text fw-semibold ms-2">Essence</span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -126,7 +151,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                        <a asp-controller="Admin" asp-action="Index" class="menu-link">
                             <i class="menu-icon tf-icons ri-home-smile-line"></i>
                             <div data-i18n="Dashboard">Dashboard</div>
                         </a>
@@ -141,7 +166,7 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
+                                <a asp-controller="Category" asp-action="Read" class="menu-link">
                                     <div data-i18n="Without menu">Category</div>
                                 </a>
                             </li>
@@ -213,7 +238,13 @@
                             </li>
                         </ul>
                     </li> *@
-                    
+
+                    <li class="menu-item">
+                        <a asp-controller="Supplier" asp-action="Read" class="menu-link">
+                            <i class="menu-icon tf-icons ri-user-line"></i>
+                            <div data-i18n="Users">Suppliers</div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a asp-controller="User" asp-action="Read" class="menu-link">
                             <i class="menu-icon tf-icons ri-user-line"></i>
@@ -308,7 +339,7 @@
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    @* <li>
                                         <a class="dropdown-item" href="#">
                                             <i class="ri-settings-4-line ri-22px me-2"></i>
                                             <span class="align-middle">Settings</span>
@@ -322,7 +353,7 @@
                                                 <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger h-px-20 d-flex align-items-center justify-content-center">4</span>
                                             </span>
                                         </a>
-                                    </li>
+                                    </li> *@
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
@@ -358,10 +389,10 @@
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>
-                                , made with <span class="text-danger"><i class="tf-icons ri-heart-fill"></i></span> by
-                                <a href="https://themeselection.com" target="_blank" class="footer-link">ThemeSelection</a>
+                                @* , made with <span class="text-danger"><i class="tf-icons ri-heart-fill"></i></span> by *@
+                                <a href="https://localhost:7211/" target="_blank" class="footer-link">Essence</a>
                             </div>
-                            <div class="d-none d-lg-inline-block">
+                            @* <div class="d-none d-lg-inline-block">
                                 <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
                                 <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
@@ -372,7 +403,7 @@
                                 <a href="https://github.com/themeselection/materio-bootstrap-html-admin-template-free/issues"
                                    target="_blank"
                                    class="footer-link">Support</a>
-                            </div>
+                            </div> *@
                         </div>
                     </div>
                 </footer>
@@ -389,12 +420,6 @@
     <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
-    <div class="buy-now">
-        <a href="https://themeselection.com/item/materio-bootstrap-html-admin-template/"
-           target="_blank"
-           class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

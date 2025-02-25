@@ -28,11 +28,18 @@
                         </div>
                     </div>
                     <div class="row mb-4">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Mobile Number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" placeholder="1234567890" asp-for="MobileNumber" />
+                        </div>
+                    </div>
+                    <div class="row mb-4">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">Email</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="basic-default-name" placeholder="john@gmail.com" asp-for="Email" />
                         </div>
                     </div>
+                    <input type="hidden" asp-for="Password" />
                     <div class="row justify-content-end">
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">Update</button>

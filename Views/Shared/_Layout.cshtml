@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+
+@{
+    var msg = TempData["Message"];
+    var type = TempData["Type"];
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,9 +25,60 @@
     <link rel="stylesheet" href="~/user/css/core-style.css">
     <link rel="stylesheet" href="~/user/style.css">
 
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/admin/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/admin/assets/vendor/fonts/remixicon/remixicon.css" />
+
+    <!-- Menu waves for no-customizer fix -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/node-waves/node-waves.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/admin/assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="~/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script src="~/admin/assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/admin/assets/js/config.js"></script>
+
 </head>
 
 <body>
+    @if (msg != null)
+    {
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+            <div class="toast show align-items-center text-black border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    @if (@type == "Success")
+                    {
+                        <i class="ri-checkbox-circle-fill text-success me-2"></i>
+                    }
+                    else
+                    {
+                        <i class="ri-error-warning-fill text-danger me-2"></i>
+                    }
+                    <div class="me-auto fw-medium">@type</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">@msg</div>
+            </div>
+        </div>
+    }
     <!-- ##### Header Area Start ##### -->
     <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
@@ -38,8 +97,10 @@
                         <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                     </div>
                     <!-- Nav Start -->
-                    <div class="classynav">
-                        <ul>
+                     @if (HttpContextAccessor.HttpContext.Session.GetString("UserId") != null)
+                    {
+                        <div class="classynav">
+                            <ul>
                             <li>
                                 <a href="#">Shop</a>
                                 <div class="megamenu">
@@ -82,19 +143,27 @@
                                     <li><a href="blog.html">Blog</a></li>
                                     <li><a href="single-blog.html">Single Blog</a></li>
                                     <li><a href="regular-page.html">Regular Page</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a asp-action="Feedback" asp-controller="Home">Contact</a></li>
                                 </ul>
                             </li>
                             <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a asp-action="Feedback" asp-controller="Home">Contact</a></li>
+                                <li><a asp-controller="Supplier" asp-action="BecomeSupplier">Become Supplier</a></li>
                         </ul>
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="classynav">></div>
+                    }
                     <!-- Nav End -->
                 </div>
             </nav>
 
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end">
+                @if (HttpContextAccessor.HttpContext.Session.GetString("UserId") != null)
+                {
                 <!-- Search Area -->
                 <div class="search-area">
                     <form action="#" method="post">
@@ -106,14 +175,32 @@
                 <div class="favourite-area">
                     <a href="#"><img src="~/user/img/core-img/heart.svg" alt=""></a>
                 </div>
+               
                 <!-- User Login Info -->
-                <div class="user-login-info">
-                    <a href="#"><img src="~/user/img/core-img/user.svg" alt=""></a>
-                </div>
-                <!-- Cart Area -->
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="~/user/img/core-img/bag.svg" alt=""> <span>3</span></a>
-                </div>
+                    <div class="user-login-info">
+                        <a asp-area="" asp-controller="Authentication" asp-action="Logout">Logout</a>
+                    </div>
+
+                    <!-- Cart Area -->
+                    <div class="cart-area">
+                        <a href="#" id="essenceCartBtn"><img src="~/user/img/core-img/bag.svg" alt=""> <span>3</span></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="user-login-info">
+                        <a asp-controller="Authentication" asp-action="Login">
+                            @* <img src="~/user/img/core-img/user.svg" alt=""> *@
+                            Login
+                        </a>
+                    </div>
+                    <div class="user-login-info">
+                        <a asp-controller="Authentication" asp-action="Login">
+                            @* <img src="~/user/img/core-img/user.svg" alt=""> *@
+                            Admin Login
+                        </a>
+                    </div>
+                }
             </div>
 
         </div>
@@ -199,6 +286,7 @@
         </div>
     </div>
     <!-- ##### Right Side Cart End ##### -->
+
     <main>
         @* <div class="container"> *@
             <main role="main" class="pb-3">
@@ -297,6 +385,31 @@
     <script src="~/user/js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="~/user/js/active.js"></script>
+
+
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/admin/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="~/admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="~/admin/assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="~/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/admin/assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="~/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/admin/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="~/admin/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 

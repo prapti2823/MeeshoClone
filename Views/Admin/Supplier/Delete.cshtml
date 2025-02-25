@@ -1,0 +1,20 @@
+﻿@model MeeshoClone.Models.Supplier.Supplier
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Delete Supplier</h5>
+        <div class="card-body">
+            <p>Are you sure you want to delete <b>@Model.BusinessName</b>?</p>
+
+            <form asp-controller="Supplier" asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-action="Read" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
